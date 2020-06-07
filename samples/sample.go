@@ -9,14 +9,28 @@ func poc() {
 	volume.ToCubicFeet()                                       // convert from SI units to cubic feet
 }
 
+/**
+* UNIT
+* length
+* NAMES
+* meter IS BASE
+* foot IS BASE * 3.28084
+*
+* UNIT
+* temperature
+* NAMES
+* celsius IS BASE + 273.15
+* fahrenheit IS ((BASE - 32) * 5 / 9) + 273.15
+ */
+
 /*
 * FUNCTION
 * IdealGasLaw
 * INPUTS
-* P as pressure
-* V as volume
-* n as mole
-* R as (pressure * volume) / (mole * temperature)
+* P AS pressure
+* V AS volume
+* n AS mole
+* R AS (pressure * volume) / (mole * temperature)
 * RETURNS
-* (P * V) / (n * R) as temperatue
+* (P * V) / (n * R) AS temperatue
  */
