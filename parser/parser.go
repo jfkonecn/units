@@ -11,10 +11,14 @@ func setResult(l yyLexer, v Result) {
 
 type yySymType struct {
 	yys int
+	str string
 }
 
 const UNIT = 57346
 const NAMES = 57347
+const IS = 57348
+const measurementName = 57349
+const unitName = 57350
 
 var yyToknames = [...]string{
 	"$end",
@@ -22,6 +26,9 @@ var yyToknames = [...]string{
 	"$unk",
 	"UNIT",
 	"NAMES",
+	"IS",
+	"measurementName",
+	"unitName",
 }
 var yyStatenames = [...]string{}
 
@@ -37,35 +44,38 @@ var yyExca = [...]int{
 
 const yyPrivate = 57344
 
-const yyLast = 4
+const yyLast = 10
 
 var yyAct = [...]int{
 
-	4, 3, 2, 1,
+	8, 7, 4, 10, 5, 3, 1, 6, 2, 9,
 }
 var yyPact = [...]int{
 
-	-3, -1000, -1000, -5, -1000,
+	1, -1000, -1000, -5, -1, -8, -1000, -8, -3, -1000,
+	-1000,
 }
 var yyPgo = [...]int{
 
-	0, 3, 2,
+	0, 8, 7, 1, 6,
 }
 var yyR1 = [...]int{
 
-	0, 1, 2,
+	0, 4, 1, 2, 2, 3,
 }
 var yyR2 = [...]int{
 
-	0, 1, 2,
+	0, 1, 4, 1, 2, 2,
 }
 var yyChk = [...]int{
 
-	-1000, -1, -2, 4, 5,
+	-1000, -4, -1, 4, 7, 5, -2, -3, 8, -3,
+	6,
 }
 var yyDef = [...]int{
 
-	0, -2, 1, 0, 2,
+	0, -2, 1, 0, 0, 0, 2, 3, 0, 4,
+	5,
 }
 var yyTok1 = [...]int{
 
@@ -73,7 +83,7 @@ var yyTok1 = [...]int{
 }
 var yyTok2 = [...]int{
 
-	2, 3, 4, 5,
+	2, 3, 4, 5, 6, 7, 8,
 }
 var yyTok3 = [...]int{
 	0,
@@ -418,6 +428,26 @@ yydefault:
 		yyDollar = yyS[yypt-1 : yypt+1]
 		{
 			setResult(yylex, 0)
+		}
+	case 2:
+		yyDollar = yyS[yypt-4 : yypt+1]
+		{
+			yyVAL.str = 1
+		}
+	case 3:
+		yyDollar = yyS[yypt-1 : yypt+1]
+		{
+			yyVAL.str = 1
+		}
+	case 4:
+		yyDollar = yyS[yypt-2 : yypt+1]
+		{
+			yyVAL.str = 1
+		}
+	case 5:
+		yyDollar = yyS[yypt-2 : yypt+1]
+		{
+			yyVAL.str = 1
 		}
 	}
 	goto yystack /* stack new state and value */

@@ -11,20 +11,39 @@ func setResult(l yyLexer, v Result) {
 
 
 %union{
+    str string
 }
 
-%token UNIT NAMES
+%token UNIT NAMES IS
+%token <str> measurementName unitName
+
+%type <str> measurementType unitList unitType
 
 %start main
 
 %%
 
-main:unitType
+main:measurementType
         {
             setResult(yylex, 0)
         }
 
-unitType: UNIT NAMES
+measurementType : UNIT measurementName NAMES unitList
+                    {
+                        $$ = 1
+                    }
 
+unitList : unitType
+            {
+                $$ = 1
+            }
+         | unitType unitType
+            {
+                $$ = 1
+            }
 
+unitType : unitName IS
+            {
+                $$ = 1 
+            }
 %%

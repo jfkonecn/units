@@ -5,8 +5,8 @@ state 0
 	UNIT  shift 3
 	.  error
 
+	measurementType  goto 2
 	main  goto 1
-	unitType  goto 2
 
 state 1
 	$accept:  main.$end 
@@ -16,33 +16,77 @@ state 1
 
 
 state 2
-	main:  unitType.    (1)
+	main:  measurementType.    (1)
 
-	.  reduce 1 (src line 22)
+	.  reduce 1 (src line 26)
 
 
 state 3
-	unitType:  UNIT.NAMES 
+	measurementType:  UNIT.measurementName NAMES unitList 
 
-	NAMES  shift 4
+	measurementName  shift 4
 	.  error
 
 
 state 4
-	unitType:  UNIT NAMES.    (2)
+	measurementType:  UNIT measurementName.NAMES unitList 
 
-	.  reduce 2 (src line 27)
+	NAMES  shift 5
+	.  error
 
 
-5 terminals, 3 nonterminals
-3 grammar rules, 5/8000 states
+state 5
+	measurementType:  UNIT measurementName NAMES.unitList 
+
+	unitName  shift 8
+	.  error
+
+	unitList  goto 6
+	unitType  goto 7
+
+state 6
+	measurementType:  UNIT measurementName NAMES unitList.    (2)
+
+	.  reduce 2 (src line 31)
+
+
+state 7
+	unitList:  unitType.    (3)
+	unitList:  unitType.unitType 
+
+	unitName  shift 8
+	.  reduce 3 (src line 36)
+
+	unitType  goto 9
+
+state 8
+	unitType:  unitName.IS 
+
+	IS  shift 10
+	.  error
+
+
+state 9
+	unitList:  unitType unitType.    (4)
+
+	.  reduce 4 (src line 40)
+
+
+state 10
+	unitType:  unitName IS.    (5)
+
+	.  reduce 5 (src line 45)
+
+
+8 terminals, 5 nonterminals
+6 grammar rules, 11/8000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
-52 working sets used
-memory: parser 1/120000
+54 working sets used
+memory: parser 4/120000
 0 extra closures
-2 shift entries, 1 exceptions
-2 goto entries
+6 shift entries, 1 exceptions
+5 goto entries
 0 entries saved by goto default
-Optimizer space used: output 4/120000
-4 table entries, 0 zero
-maximum spread: 5, maximum offset: 5
+Optimizer space used: output 10/120000
+10 table entries, 0 zero
+maximum spread: 8, maximum offset: 8
