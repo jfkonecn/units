@@ -1,0 +1,48 @@
+
+state 0
+	$accept: .main $end 
+
+	UNIT  shift 3
+	.  error
+
+	main  goto 1
+	unitType  goto 2
+
+state 1
+	$accept:  main.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	main:  unitType.    (1)
+
+	.  reduce 1 (src line 22)
+
+
+state 3
+	unitType:  UNIT.NAMES 
+
+	NAMES  shift 4
+	.  error
+
+
+state 4
+	unitType:  UNIT NAMES.    (2)
+
+	.  reduce 2 (src line 27)
+
+
+5 terminals, 3 nonterminals
+3 grammar rules, 5/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+52 working sets used
+memory: parser 1/120000
+0 extra closures
+2 shift entries, 1 exceptions
+2 goto entries
+0 entries saved by goto default
+Optimizer space used: output 4/120000
+4 table entries, 0 zero
+maximum spread: 5, maximum offset: 5
